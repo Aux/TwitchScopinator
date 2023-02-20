@@ -2,6 +2,8 @@ name: Main
 on: [push]
 env:
   NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+permissions:
+  contents: write
 
 jobs:
   build:

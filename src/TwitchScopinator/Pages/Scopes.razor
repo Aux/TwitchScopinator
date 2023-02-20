@@ -1,0 +1,98 @@
+﻿@using TwitchScopinator.Models
+@using System.Linq
+
+@page "/scopes/{scope}"
+@inject HttpClient Http
+
+<PageTitle>Twitch @Scope Scope</PageTitle>
+<HeadContent>
+    <meta name="og:title" content="@Scope" />
+    <meta name="og:description" content="This scope has @Total available action(s)." />
+</HeadContent>
+
+
+<h3>Actions with the <code>@Scope</code> scope</h3>
+
+@if (Chat?.Count() > 0) 
+{
+    <h4>Chat</h4>
+    <ul>
+    @foreach (var item in Chat!)
+    {
+        <li>
+            <a href="@item.Link">[link]</a> <b>@item.Name: </b>@item.Description
+        </li>
+    }
+    </ul>
+}
+
+@if (Rest?.Count() > 0)
+{
+    <h4>Rest</h4>
+    <ul>
+    @foreach (var item in Rest!)
+    {
+        <li>
+            <a href="@item.Link">[link]</a> <b>@item.Name: </b>@item.Description
+        </li>
+    }
+    </ul>
+}
+
+@if (Pubsub?.Count() > 0)
+{
+    <h4>Pubsub</h4>
+    <ul>
+    @foreach (var item in Pubsub!)
+    {
+        <li>
+            <a href="@item.Link">[link]</a> <b>@item.Name: </b>@item.Description
+        </li>
+    }
+    </ul>
+}
+
+@if (Eventsub?.Count() > 0)
+{
+    <h4>Eventsub</h4>
+    <ul>
+    @foreach (var item in Eventsub!)
+    {
+        <li>
+            <a href="@item.Link">[link]</a> <b>@item.Name: </b>@item.Description
+        </li>
+    }
+    </ul>
+}
+
+@code {
+    private ScopeInfo? Info;
+    private int Total = 0;
+
+    public IEnumerable<TwitchAction>? Chat = null;
+    public IEnumerable<RestAction>? Rest = null;
+    public IEnumerable<TwitchAction>? Pubsub = null;
+    public IEnumerable<EventSubAction>? Eventsub = null;
+
+    [Parameter]
+    public string? Scope { get; set; } = null;
+
+    protected override void OnParametersSet()
+    {
+        Scope = Scope?.ToLower();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Info = await Http.GetFromJsonAsync<ScopeInfo>("twitch-scope-info.json");
+
+        Chat = Info!.Chat.Where(x => x.Scopes!.Contains(Scope?.ToLower()));
+        Rest = Info!.Rest.Where(x => x.Scopes!.Contains(Scope?.ToLower()));
+        Pubsub = Info!.PubSub.Where(x => x.Scopes!.Contains(Scope?.ToLower()));
+        Eventsub = Info!.EventSub.Where(x => x.Scopes!.Contains(Scope?.ToLower()));
+
+        Total = (Chat?.Count() ?? 0) + (Rest?.Count() ?? 0) + (Pubsub?.Count() ?? 0) + (Eventsub?.Count() ?? 0);
+
+        StateHasChanged();
+    }
+}

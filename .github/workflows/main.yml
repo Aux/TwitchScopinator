@@ -16,7 +16,7 @@ jobs:
     - name: Publish
       run: dotnet publish -c Release --nologo
     - name: Set Base Tag
-      run: sed -i 's/<base href="\/" \/>/<base href="\/TwitchScopinator\/" \/>/g' release/wwwroot/index.html
+      run: sed -i 's/<base href="\/" \/>/<base href="\/TwitchScopinator\/" \/>/g' $BUILD_DIR/wwwroot/index.html
     - name: Copy index to 404
       run: cp $BUILD_DIR/wwwroot/index.html $BUILD_DIR/wwwroot/404.html
     - name: Deploy to Github Pages

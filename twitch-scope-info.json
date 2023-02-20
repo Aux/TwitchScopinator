@@ -1,0 +1,113 @@
+{
+  "chat": [
+    {
+      "name": "Anonymous Login",
+      "description": "Chat can be joined without any authentication when using justinfan<numbers> as your username and password. eg: justinfan1997",
+      "scopes": [],
+      "link": null
+    },
+    {
+      "name": "Login",
+      "description": "Ability to join chat as the authorized user.",
+      "scopes": [ "chat:read" ],
+      "link": "https://dev.twitch.tv/docs/irc/authenticate-bot/"
+    },
+    {
+      "name": "Send Messages",
+      "description": "Ability to send messages as the authorized user.",
+      "scopes": [ "chat:edit" ],
+      "link": "https://dev.twitch.tv/docs/irc/authenticate-bot/"
+    }
+  ],
+  "pubsub": [
+    {
+      "name": "Bits v1",
+      "description": "Anyone cheers in a specified channel.",
+      "scopes": [ "bits:read" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-bits-event-v1-message"
+    },
+    {
+      "name": "Bits v2",
+      "description": "Anyone cheers in a specified channel.",
+      "scopes": [ "bits:read" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-bits-event-v2-message"
+    },
+    {
+      "name": "Bits Badge Notification",
+      "description": "Message sent when a user earns a new Bits badge in a particular channel, and chooses to share the notification with chat.",
+      "scopes": [ "bits:read" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-bits-badge-notification-message"
+    },
+    {
+      "name": "Channel Points",
+      "description": "A custom reward is redeemed in a channel.",
+      "scopes": [ "channel:read:redemptions" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-channel-points-event-message"
+    },
+    {
+      "name": "Channel Subscriptions",
+      "description": "Anyone subscribes (first month), resubscribes (subsequent months), or gifts a subscription to a channel. ",
+      "scopes": [ "channel:read:subscriptions" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-channel-subscriptions-event-message"
+    },
+    {
+      "name": "AutoMod Queue",
+      "description": "AutoMod flags a message as potentially inappropriate, and when a moderator takes action on a message.",
+      "scopes": [ "channel:moderate" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-automod-queue-message"
+    },
+    {
+      "name": "Moderator Actions",
+      "description": "Examples of moderator actions are bans, unbans, timeouts, deleting messages, changing chat mode (followers-only, subs-only), changing AutoMod levels, and adding a mod.",
+      "scopes": [ "channel:moderate" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#topics"
+    },
+    {
+      "name": "Low Trust Users",
+      "description": "The broadcaster or a moderator updates the low trust status of a user, or a new message has been sent in chat by a potential ban evader or a bans shared user.",
+      "scopes": [ "channel:moderate" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-low-trust-user-treatment-message"
+    },
+    {
+      "name": "Moderation Notifications",
+      "description": "A user’s message held by AutoMod has been approved or denied.",
+      "scopes": [ "chat:read" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-user-moderation-notification-message"
+    },
+    {
+      "name": "Whispers",
+      "description": "Anyone whispers the specified user.",
+      "scopes": [ "whispers:read" ],
+      "link": "https://dev.twitch.tv/docs/pubsub/#example-whispers-event-message"
+    }
+  ],
+  "eventsub": [
+    {
+      "category": "Channels",
+      "name": "Channel Update",
+      "version": "1",
+      "description": "A broadcaster updates their channel properties e.g., category, title, mature flag, broadcast, or language.",
+      "scopes": [ "channel.update" ],
+      "scope_required": false,
+      "link": "https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelupdate"
+    }
+  ],
+  "rest": [
+    {
+      "category": "Ads",
+      "name": "Start Commercial",
+      "description": "Starts a commercial on the specified channel.",
+      "scopes": [ "channel:edit:commercial" ],
+      "allow_app_auth": false,
+      "link": "https://dev.twitch.tv/docs/api/reference/#start-commercial"
+    },
+    {
+      "category": "Analytics",
+      "name": "Get Extension Analytics",
+      "description": "Gets an analytics report for one or more extensions.",
+      "scopes": [ "analytics:read:extensions" ],
+      "allow_app_auth": false,
+      "link": "https://dev.twitch.tv/docs/api/reference/#get-extension-analytics"
+    }
+  ]
+}

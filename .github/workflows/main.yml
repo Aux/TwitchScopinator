@@ -2,7 +2,6 @@ name: Main
 on: [push]
 env:
   NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  BUILD_DIR: "/home/runner/work/TwitchScopinator/src/TwitchScopinator/bin/Release/net7.0"
 
 jobs:
   build:
@@ -14,14 +13,11 @@ jobs:
       with:
         source-url: https://nuget.pkg.github.com/AuxLabs/index.json
     - name: Publish
-      run: dotnet publish -c Release --nologo
-    - name: Set Base Tag
-      run: sed -i 's/<base href="\/" \/>/<base href="\/TwitchScopinator\/" \/>/g' $BUILD_DIR/wwwroot/index.html
-    - name: Copy index to 404
-      run: cp $BUILD_DIR/wwwroot/index.html $BUILD_DIR/wwwroot/404.html
+      run: dotnet publish --configuration Release --output build
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: $BUILD_DIR/wwwroot
+        FOLDER: build/wwwroot
+        SINGLE_COMMIT: true

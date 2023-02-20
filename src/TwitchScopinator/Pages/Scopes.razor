@@ -2,14 +2,10 @@
 @using System.Linq
 
 @page "/scopes/{scope}"
+@page "/scope/{scope}"
 @inject HttpClient Http
 
 <PageTitle>Twitch @Scope Scope</PageTitle>
-<HeadContent>
-    <meta name="og:title" content="@Scope" />
-    <meta name="og:description" content="This scope has @Total available action(s)." />
-</HeadContent>
-
 
 <h3>Actions with the <code>@Scope</code> scope</h3>
 

@@ -13,11 +13,11 @@ jobs:
       with:
         source-url: https://nuget.pkg.github.com/AuxLabs/index.json
     - name: Publish
-      run: dotnet publish --configuration Release --output build
+      run: dotnet publish -c Release
     - name: Deploy to Github Pages
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
-        FOLDER: build/wwwroot
+        FOLDER: "/TwitchScopinator/src/TwitchScopinator/bin/Release/net7.0/wwwroot"
         SINGLE_COMMIT: true
